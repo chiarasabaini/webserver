@@ -2,25 +2,18 @@
 
 ![VirtualBox](https://badgen.net/badge/icon/VirtualBox/183A61?labelColor=FFF&icon=https://simpleicons.org/icons/virtualbox.svg&label) ![VMware](https://badgen.net/badge/icon/VMware/607078?labelColor=FFF&icon=https://simpleicons.org/icons/vmware.svg&label) ![Hyper-V](https://badgen.net/badge/icon/Hyper-V/0078D7?labelColor=FFF&icon=https://simpleicons.org/icons/microsoft.svg&label) ![xAMPP](https://badgen.net/badge/icon/xAMPP/F97300?labelColor=FFF&icon=https://simpleicons.org/icons/xampp.svg&label) ![Apache](https://badgen.net/badge/icon/Apache/D22128?labelColor=FFF&icon=https://simpleicons.org/icons/apache.svg&label) ![MySQL](https://badgen.net/badge/icon/MySQL/4479A1?labelColor=FFF&icon=https://simpleicons.org/icons/mysql.svg&label) ![PHP](https://badgen.net/badge/icon/PHP/777BB4?labelColor=FFF&icon=https://simpleicons.org/icons/php.svg&label)
 
-![ProjectName](https://badgen.net/badge/Project%20Name/<name>/0058E7?labelColor=000) ![Version](https://badgen.net/badge/Version/01.01/cyan?labelColor=000) ![Author](https://badgen.net/badge/Authors/Sabaini%20Chiara/60C?labelColor=000)
+![ProjectName](https://badgen.net/badge/Project%20Name/Webserver/0058E7?labelColor=000) ![Version](https://badgen.net/badge/Version/01.01/cyan?labelColor=000) ![Author](https://badgen.net/badge/Authors/Sabaini%20Chiara/60C?labelColor=000)
 
-
-It’s always a good practice to test your site on the local server before you actually publish it to the real server.
-
-In this guide I'm going to explain how to create a local server environment on your machine.
-
-I'm going to use the xAMPP stack.\
-xAMPP stands for ***X &#x2192; cross-platform***, ***A &#x2192; Apache***, ***M &#x2192; MySQL***, ***P &#x2192; PHP***, ***P &#x2192; Perl***.\
-It is a completely free and open source solution that gives you an incredible local web server to work on.
-
-Installing the xAMPP stack simply gives you a control panel to manage all the inclusive components and sets you free from learning and remembering commands to run Apache, MySQL, etc.
 
 ---
 
 ## Content
-- [Setup of the xAMPP stack on a Windows system](#setting-up-xampp-on-a-windows-system)
-- [Setup of the LAMPP stack on a Linux based system](#setting-up-lampp-on-a-linux-based-system)
-- [Testing the setup](#testing-the-setup)
+
+- [Requirements](#requirements)
+- [Setting up the enviroment](#setting-up-the-enviroment)
+    - [Setup of the xAMPP stack on a Windows system](#setting-up-xampp-on-a-windows-system)
+    - [Setup of the LAMPP stack on a Linux based system](#setting-up-lampp-on-a-linux-based-system)
+    - [Testing the setup](#testing-the-setup)
 
 ---
 
@@ -35,6 +28,17 @@ Installing the xAMPP stack simply gives you a control panel to manage all the in
 - 2 VMs
     - 1 with a Linux based OS
     - 1 with Windows
+
+---
+### Setting up the enviroment
+
+In the following paragraphs I'm going to explain how to create a local server environment on your machine.
+
+I'm going to use the xAMPP stack.\
+xAMPP stands for ***X &#x2192; cross-platform***, ***A &#x2192; Apache***, ***M &#x2192; MySQL***, ***P &#x2192; PHP***, ***P &#x2192; Perl***.\
+It is a completely free and open source solution that gives you an incredible local web server to work on.
+
+Installing the xAMPP stack simply gives you a control panel to manage all the inclusive components and sets you free from learning and remembering commands to run Apache, MySQL, etc.
 
 ---
 
