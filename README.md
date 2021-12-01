@@ -180,6 +180,30 @@ Confirm the installation by typing <kbd>Y</kbd>, and then <kbd>ENTER</kbd>.
 - ***Step 3 - Installing PHP***
 ![PHP](https://badgen.net/badge/icon/PHP/777BB4?labelColor=FFF&icon=https://simpleicons.org/icons/php.svg&label)
 
+PHP is the component of our setup that will process code to display dynamic content to the final user.\
+In addition to the `php` package, you’ll need `php-mysql` (PHP module that allows PHP to communicate with MySQL-based databases) and `libapache2-mod-php` (enables Apache to handle PHP files).
+
+To install these packages, run:
+
+```bash
+$ sudo apt install php libapache2-mod-php php-mysql
+```
+
+Once the installation is finished, you can run this command to check your PHP version:
+
+```bash
+$ php -v
+```
+
+Output:
+
+```bash
+PHP 7.4.3 (cli) (built: Oct 21 2021 9:13:35) ( NTS )
+Copyright (c) The PHP Group
+Zend Engine v3.4.0, Copyright (c) Zend Technologies
+    with Zend OPcache v7.4.3, Copyright (c), by Zend Technologies
+```
+
 ---
 
 ### Testing the setup
