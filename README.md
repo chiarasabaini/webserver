@@ -204,6 +204,27 @@ Zend Engine v3.4.0, Copyright (c) Zend Technologies
     with Zend OPcache v7.4.3, Copyright (c), by Zend Technologies
 ```
 
+- ***Step 4 - Creating a Virtual Host***
+![Virtual Host](https://badgen.net/badge/icon/Virtual%20Host/D22128?labelColor=FFF&icon=https://simpleicons.org/icons/apache.svg&label)
+
+Apache's virtual hosts (similar to server blocks in Nginx) it's used to encapsulate configuration details and host more than one domain from a single server.
+
+Apache (on Ubuntu) has one server block enabled by default that is configured to serve documents from the `/var/www/html` directory.\
+This works well for a single site, but it can become unwieldy if you are hosting multiple sites.\
+Instead of modifying `/var/www/html`, we’ll create a directory structure within `/var/www` for `<your_domain>` site, leaving `/var/www/html` in place as the default directory to be served if a client request doesn’t match any other sites.
+
+First, you need to create the directory for `<your_domain>` as follows:
+
+```bash
+$ sudo mkdir /var/www/<your_domain>
+```
+
+Then, assign ownership of the directory with the `$USER` environment variable, which will reference your current system user:
+
+```bash
+$ sudo chown -R $USER:$USER /var/www/<your_domain>
+```
+
 ---
 
 ### Testing the setup
