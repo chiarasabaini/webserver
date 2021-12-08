@@ -234,7 +234,7 @@ $ sudo nano /etc/apache2/sites-available/<your_domain>.conf
 
 This will create a new blank file. Paste in the following bare-bones configuration:
 
-```bash
+```xml
 <VirtualHost *:80>
     ServerName <your_domain>
     ServerAlias www.<your_domain>
@@ -252,7 +252,7 @@ With this VirtualHost configuration, we’re telling Apache to serve `<your_doma
 You can now use `a2ensite` to enable the new virtual host:
 
 ```bash
-sudo a2ensite your_domain
+$ sudo a2ensite your_domain
 ```
 
 You might want to disable the default website that comes installed with Apache.\
@@ -261,22 +261,149 @@ This is required if you’re not using a custom domain name, because in this cas
 To disable Apache’s default website, type:
 
 ```bash
-sudo a2dissite 000-default
+$ sudo a2dissite 000-default
 ```
 
 To be sure that your configuration file doesn’t contain syntax errors, run:
 
 ```bash
-sudo apache2ctl configtest
+$ sudo apache2ctl configtest
 ```
  
 Finally, reload Apache to apply this changes:
 
 ```bash
-sudo systemctl reload apache2
+$ sudo systemctl reload apache2
 ```
 
 ---
 
 ### Testing the setup
 ![Testing](https://badgen.net/badge/icon/Testing/0E0?labelColor=FFF&icon=https://www.reshot.com/preview-assets/icons/Y3PM7Z5ELC/testing-Y3PM7Z5ELC.svg&label)
+
+- ***Step 1 - Testing the Virtual Host***
+
+Your new website is now active, but the web root `/var/www/your_domain` is still empty. Create an `index.html` file in that location so that we can test that the virtual host works as expected:
+
+```bash
+$ nano /var/www/your_domain/index.html
+```
+
+Include the following content in this file:
+
+```html
+<html>
+  <head>
+    <title>Hello world!</title>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+
+    <p>This is the landing page of <strong>my new website</strong>.</p>
+  </body>
+</html>
+```
+ 
+Now go to your browser and access your server’s domain name or IP address once again: `http://server_domain_or_IP`
+
+You’ll see a page like this:
+
+<add pic>
+
+***Changing the `DirectoryIndex` setup on Apache***
+
+With the default `DirectoryIndex` settings on Apache, a file named `index.html` will always take precedence over an `index.php` file. This is useful for setting up maintenance pages in PHP applications, by creating a temporary `index.html` file containing an informative message to visitors. Because this page will take precedence over the `index.php` page, it will then become the landing page for the application. Once maintenance is over, the `index.html` is renamed or removed from the document root, bringing back the regular application page.
+
+In case you want to change this behavior, you’ll need to edit the `/etc/apache2/mods-enabled/dir.conf` file and modify the order in which the index.php file is listed within the `DirectoryIndex` directive:
+
+```bash
+$ sudo nano /etc/apache2/mods-enabled/dir.conf
+```
+
+It's content has to look like this:
+```xml
+<IfModule mod_dir.c>
+        DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
+</IfModule>
+```
+
+After saving and closing the file, you’ll need to reload Apache so the changes take effect:
+
+```bash
+$ sudo systemctl reload apache2
+```
+
+- ***Step 2 - Testing PHP processing on your webserver***
+
+Now, we’ll create a PHP test script to confirm that Apache is able to handle and process requests for PHP files.
+
+Create a new file named `info.php` inside your custom web root folder:
+
+```bash
+$ nano /var/www/your_domain/info.php
+```
+
+This will open a blank file. Add the following text, which is valid PHP code, inside the file:
+
+```php
+<?php
+phpinfo();
+>
+```
+Save and close the file.
+
+To test this script, go to your web browser and access your server’s domain name or IP address, followed by the script name, which in this case is `info.php`:
+
+`http://<server_domain_or_IP>/info.php`
+
+You’ll see a page similar to this:
+![phpinfo](https://assets.digitalocean.com/articles/lamp_ubuntu2004/phpinfo.png)
+
+If you can see this page in your browser, then your PHP installation is working as expected.
+
+- ***Step 3 - Testing DB connection from PHP***
+
+We're going to create test table with dummy data and query for its contents from a PHP script. Before we can do that, we need to create a test database and a new MySQL user properly configured to access it.
+
+First, connect to the MySQL console using the root account:
+
+```bash
+$ sudo mysql
+```
+
+To create a new database, run the following command from your MySQL console:
+
+```bash
+mysql> CREATE DATABASE dummyDB;
+```
+
+Now you can create a new user and grant them full privileges on the custom database you’ve just created.
+
+The following command creates a new user named `admin`, using `mysql_native_password` as default authentication method. We’re defining this user’s password as `password`, but you should replace this value with a secure password of your own choosing.
+
+```bash
+mysql> CREATE USER 'admin'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+```
+
+To give this user permission over the `dummyDB` database:
+
+```bash
+mysql> GRANT ALL ON dummyDB.* TO 'admin'@'localhost';
+```
+
+It's time to create a table (I'll call it `students`):
+```bash
+mysql> CREATE TABLE students(
+                mat INT,
+                name VARCHAR(25),
+                surname VARCHAR(25),
+                PRIMARY KEY(mat)
+            );
+```
+
+Now we can execute an INSERT to insert some data in the table:
+
+```bash
+mysql> INSERT INTO students VALUES(18910, "Marilyn", "Monroe");
+```
+
