@@ -163,6 +163,8 @@ Traffic on port `80` is now allowed through the firewall.
 
 To check if everything went as planned paste this url into your browser: `http://localhost`. You should be able to see the default Apache web page.
 
+*If it returns `Status: incative`, just run `sudo ufw enable` and check again.*
+
 
 - ***Step 2 — Installing MySQL***
 ![MySQL](https://badgen.net/badge/icon/MySQL/4479A1?labelColor=FFF&icon=https://simpleicons.org/icons/mysql.svg&label)
