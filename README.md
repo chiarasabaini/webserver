@@ -394,6 +394,13 @@ mysql> GRANT ALL ON dummyDB.* TO 'admin'@'localhost';
 ```
 
 It's time to create a table (I'll call it `students`):
+
+First select the datsabase with this command:
+```bash
+mysql> USE dummyDB;
+```
+
+Then create the table following this example:
 ```bash
 mysql> CREATE TABLE students(
                 mat INT,
